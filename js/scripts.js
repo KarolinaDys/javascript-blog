@@ -32,9 +32,9 @@ function generateTitleLinks() {
         /* insert link into titleList */
 
         html = html + linkHTML;
-    
+
     }
-    
+
     titleList.innerHTML = html;
 }
 
