@@ -112,12 +112,16 @@ function tagClickHandler(event) {
   /*END LOOP: for each found tag link*/
   }
   /*execute function "generateTitleLinks"with article selector as argument*/
-  generateTitleLinks('[data-tags~="'+ tag +'"]')
+  generateTitleLinks('[data-tags~="'+ tag +'"]');
 }
 function addClickListenersToTags() {
   /*find all links to tags*/
+  const links = document.querySelectorAll('.post-tags a, .tags a');
   /*START LOOP: for each link*/
+  for(let link of links) {
   /*add tagClickHandler as event listener for that link*/
-  /*END LOOP: for each link*/
+    link.addEventListener('click', tagClickHandler);
+    /* END LOOP: for each link */
+  }
 }
 addClickListenersToTags();
