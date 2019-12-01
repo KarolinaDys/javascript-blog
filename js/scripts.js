@@ -145,3 +145,43 @@ html = html + linkHTML;
 /*insert HTMLof all the links into authors wrapper*/
 authorWrapper.innerHTML = html;
 }
+function authorClickHandler(event) {
+  /*prevent default for this event*/
+  event.preventDefault();
+  /*make new constant named "clickedElement and give it the value of"this"*/
+  const clickedElement = this;
+  /*make a new constant "href" and read the attribute "href" of the clicked element*/
+  const href = clickedElement.getAttribute('href');
+  /*make a new constant "tag"and extract tag and extract tag from the "herf" constant*/
+  const author = href.replace('#author-', '');
+  /*find all tag links with class active*/
+  const activeAuthorLinks = document.querySelectorAll('a.active[href^="#author-"]');
+  /*START LOOP: for each active tag links*/
+  for(let activeAuthorLink of activeAuthorLinks) {
+  /*remove class active*/
+    activeAuthorLink.classList.remove('active');
+  /*END LOOP: for each active tag link*/
+  }
+  /*find all tag with "herf" attribute to the "herf" constatnt*/
+  /*!!!Could you explain why this code looks that?!!!*/
+  const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
+  /*START LOOP: for each found tag link */
+  for(let authorLink of authorLinks){
+  /*add class active*/
+    authorLink.classList.add('active');
+  /*END LOOP: for each found tag link*/
+  }
+  /*execute function "generateTitleLinks"with article selector as argument*/
+  generateTitleLinks('[data-author="'+ author +'"]');
+}
+function addClickListenersToAuthors() {
+  /*find all links to tags*/
+  const links = document.querySelectorAll('.post-author a, .author a');
+  /*START LOOP: for each link*/
+  for(let link of links) {
+  /*add tagClickHandler as event listener for that link*/
+    link.addEventListener('click', authorClickHandler);
+    /* END LOOP: for each link */
+  }
+}
+addClickListenersToAuthors();
